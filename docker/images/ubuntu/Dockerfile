@@ -1,7 +1,7 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 LABEL maintainer="Postman Labs <help@postman.com>"
 
-ARG NODE_VERSION=10
+ARG NODE_VERSION=14
 ARG NEWMAN_VERSION
 
 # Bail out early if NODE_VERSION is not provided
@@ -19,6 +19,7 @@ RUN apt-get update -y && \
     bash /opt/install_node.sh && \
     apt-get install -y nodejs && \
     npm install -g newman@${NEWMAN_VERSION} && \
+    npm install -g newman-reporter-html && \
     rm /opt/install_node.sh && \
     apt-get purge -y gnupg;
 
@@ -41,4 +42,4 @@ WORKDIR /etc/newman
 # docker run -v /home/collections:/etc/newman -t postman/newman_ubuntu run YourCollection.json.postman_collection \
 #                                                                          -e YourEnvironment.postman_environment \
 #                                                                          -H newman_report.html
-ENTRYPOINT ["newman"]
+# ENTRYPOINT ["newman"]
