@@ -16,6 +16,7 @@ ADD https://deb.nodesource.com/setup_$NODE_VERSION.x /opt/install_node.sh
 RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y gnupg && \
+    apt-get install -y iputils-ping && \
     bash /opt/install_node.sh && \
     apt-get install -y nodejs && \
     npm install -g newman@${NEWMAN_VERSION} && \
